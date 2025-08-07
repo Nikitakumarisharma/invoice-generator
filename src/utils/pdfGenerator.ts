@@ -455,8 +455,8 @@ export const generateInvoicePDF = async (
       "Phone: +91 85957 66812",
       "WhatsApp: +91 88104 45899",
       "Email: 121@taxlegit.com",
-      "Website: www.taxlegit.com & ",
-      "www.ngoexperts.com",
+      "Website: www.taxlegit.com ",
+      
     ];
     contactDetails.forEach((contact, index) =>
       pdf.text(contact, 150, footerRightY + index * 4.5)

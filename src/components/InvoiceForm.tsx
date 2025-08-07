@@ -131,17 +131,15 @@ export default function InvoiceForm({ onInvoiceChange }: InvoiceFormProps) {
   return (
     <div className="bg-white rounded-2xl shadow-xl p-8 w-full mx-auto">
       <div className="flex items-center gap-3 mb-8">
-        <FaFileInvoice className="text-3xl text-green-500" />
-        <h1 className="text-3xl font-bold text-[#7C5128]">
-          Quotation Generator
-        </h1>
+        <FaFileInvoice className="text-3xl text-red-400" />
+        <h1 className="text-3xl font-bold text-red-500">Quotation Generator</h1>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         {/* Company Type Dropdown */}
         <div>
           <div className="flex items-center gap-2 mb-2">
-            <FaBuilding className="text-green-500" />
+            <FaBuilding className="text-red-500" />
             <label className="text-base font-semibold text-gray-700">
               Company Type
             </label>
@@ -149,7 +147,7 @@ export default function InvoiceForm({ onInvoiceChange }: InvoiceFormProps) {
           <select
             value={companyType}
             onChange={(e) => setCompanyType(e.target.value as CompanyType)}
-            className={`w-full p-4 border-2 border-gray-200 rounded-xl focus:border-[#C2FEBC] focus:outline-none bg-white ${
+            className={`w-full p-4 border-2 border-gray-200 rounded-xl focus:border-red-200 focus:outline-none bg-white ${
               companyType === "" ? "text-gray-400" : "text-gray-700"
             }`}
           >
@@ -167,7 +165,7 @@ export default function InvoiceForm({ onInvoiceChange }: InvoiceFormProps) {
         {/* State Dropdown */}
         <div>
           <div className="flex items-center gap-2 mb-2">
-            <FaMapMarkerAlt className="text-green-600" />
+            <FaMapMarkerAlt className="text-red-500" />
             <label className="text-base font-semibold text-gray-700">
               State
             </label>
@@ -175,7 +173,7 @@ export default function InvoiceForm({ onInvoiceChange }: InvoiceFormProps) {
           <select
             value={selectedStateName}
             onChange={(e) => setSelectedStateName(e.target.value)}
-            className={`w-full p-4 border-2 border-gray-200 rounded-xl focus:border-[#C2FEBC] focus:outline-none  ${
+            className={`w-full p-4 border-2 border-gray-200 rounded-xl focus:border-red-200 focus:outline-none  ${
               selectedStateName === "" ? "text-gray-400" : "text-gray-700"
             }`}
           >
@@ -193,15 +191,15 @@ export default function InvoiceForm({ onInvoiceChange }: InvoiceFormProps) {
         {/* Add-ons Dropdown */}
         <div>
           <div className="flex items-center gap-2 mb-2">
-            <FaPlus className="text-green-500 text-sm" />
-            <label className="text-base font-semibold text-[#7C5128]">
+            <FaPlus className="text-red-500 text-sm" />
+            <label className="text-base font-semibold text-black">
               Add-ons
             </label>
           </div>
           <select
             onChange={(e) => handleAddOnToggle(e.target.value)}
             value="" // Always reset to show the placeholder
-            className="w-full p-4 border-2 border-gray-200 rounded-xl focus:border-green-500 focus:outline-none text-gray-700 bg-white"
+            className="w-full p-4 border-2 border-gray-200 rounded-xl focus:border-red-200 focus:outline-none text-gray-700 bg-white"
           >
             <option value="" disabled>
               -- Select an Add-on --
@@ -221,7 +219,7 @@ export default function InvoiceForm({ onInvoiceChange }: InvoiceFormProps) {
                 .map((addon) => (
                   <span
                     key={addon.id}
-                    className="inline-flex items-center px-3 py-1 text-sm font-medium bg-green-100 text-green-800 rounded-full"
+                    className="inline-flex items-center px-3 py-1 text-sm font-medium bg-red-200 text-black rounded-full"
                   >
                     {addon.name}
                     <button
@@ -242,7 +240,7 @@ export default function InvoiceForm({ onInvoiceChange }: InvoiceFormProps) {
         {/* Person Counter */}
         <div>
           <div className="flex items-center gap-2 mb-2">
-            <FaUsers className="text-green-500" />
+            <FaUsers className="text-red-500" />
             <label className="text-base font-semibold text-gray-700">
               Number of Directors
             </label>
