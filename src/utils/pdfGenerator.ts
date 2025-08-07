@@ -151,7 +151,7 @@ export const generateInvoicePDF = async (
         })
         .replace(/\//g, "-");
       const dateTextFormatted = `Date: ${currentDate}`;
-      pdf.text(dateTextFormatted, 20, 54);
+      pdf.text(dateTextFormatted, 20, 55);
     }
     // --- END: Updated Bill To Section ---
 
@@ -217,9 +217,9 @@ export const generateInvoicePDF = async (
     pdf.setTextColor(0, 0, 0);
 
     yPos += 8;
-    pdf.text("Sr. No.", tableLeftX + 10, yPos, { align: "center" });
+    pdf.text("S. No.", tableLeftX + 10, yPos, { align: "center" });
     pdf.text("Services", tableLeftX + col1Width + 2, yPos);
-    pdf.text("Amount", tableRightX - 2, yPos - 3, { align: "right" });
+    pdf.text("Amount", tableRightX - 2, yPos, { align: "right" });
     yPos += 4;
     pdf.setLineWidth(0.3);
     pdf.line(tableLeftX, yPos, tableRightX, yPos);
@@ -230,9 +230,9 @@ export const generateInvoicePDF = async (
     mainFees.forEach((item, index) => {
       mainFeesTotal += item.amount;
       pdf.text(`${index + 1}`, tableLeftX + 10, yPos, { align: "center" });
-      pdf.text(item.label, tableLeftX + col1Width + 2, yPos + 2);
+      pdf.text(item.label, tableLeftX + col1Width + 2, yPos);
       const amountText = item.amount.toLocaleString("en-IN");
-      pdf.text(amountText, tableRightX - 2, yPos + 2, { align: "right" });
+      pdf.text(amountText, tableRightX - 2, yPos, { align: "right" });
       yPos += 7;
     });
 
@@ -276,7 +276,7 @@ export const generateInvoicePDF = async (
       yPos += 8;
       pdf.text("Sr. No.", tableLeftX + 10, yPos, { align: "center" });
       pdf.text("Services", tableLeftX + col1Width + 2, yPos);
-      pdf.text("Amount ", tableRightX - 2, yPos - 3, { align: "right" });
+      pdf.text("Amount ", tableRightX - 2, yPos, { align: "right" });
       yPos += 4;
       pdf.setLineWidth(0.3);
       pdf.line(tableLeftX, yPos, tableRightX, yPos);
@@ -287,9 +287,9 @@ export const generateInvoicePDF = async (
       invoice.addOns.forEach((addon, index) => {
         addOnsTotal += addon.price;
         pdf.text(`${index + 1}`, tableLeftX + 10, yPos, { align: "center" });
-        pdf.text(addon.name, tableLeftX + col1Width + 2, yPos + 2);
+        pdf.text(addon.name, tableLeftX + col1Width + 2, yPos);
         const addonAmountText = addon.price.toLocaleString("en-IN");
-        pdf.text(addonAmountText, tableRightX - 2, yPos + 2, {
+        pdf.text(addonAmountText, tableRightX - 2, yPos, {
           align: "right",
         });
         yPos += 7;
