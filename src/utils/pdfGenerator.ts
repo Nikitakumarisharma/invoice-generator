@@ -151,7 +151,7 @@ export const generateInvoicePDF = async (
         })
         .replace(/\//g, "-");
       const dateTextFormatted = `Date: ${currentDate}`;
-      pdf.text(dateTextFormatted, 20, 50);
+      pdf.text(dateTextFormatted, 20, 54);
     }
     // --- END: Updated Bill To Section ---
 
@@ -170,12 +170,12 @@ export const generateInvoicePDF = async (
     // Calculate additional fees based on person count
     let additionalDscFee = 0;
     let additionalDinFee = 0;
-    
+
     if (personCount > 2) {
       // DSC logic: After 2 persons, add ₹2360 for each additional person
       additionalDscFee = (personCount - 2) * 2360;
     }
-    
+
     if (personCount > 3) {
       // DIN logic: After 3 persons, add ₹1180 for each additional person
       additionalDinFee = (personCount - 3) * 1180;
@@ -183,9 +183,9 @@ export const generateInvoicePDF = async (
 
     // --- TABLE 1: Main Services ---
     const mainFees = [
-      { 
-        label: `${personCount} x DSC Fees`, 
-        amount: invoice.baseFees.dsc + additionalDscFee 
+      {
+        label: `${personCount} x DSC Fees`,
+        amount: invoice.baseFees.dsc + additionalDscFee,
       },
       { label: "RUN + PANTAN", amount: invoice.baseFees.runPanTan },
       { label: "Professional Fees", amount: invoice.baseFees.professionalFee },
@@ -196,7 +196,10 @@ export const generateInvoicePDF = async (
     ];
 
     // Always add DIN item, but with 0 price for 2-3 persons
-    const dinLabel = personCount <= 3 ? `${personCount} x DIN Fees` : `${personCount - 3} x DIN Fees`;
+    const dinLabel =
+      personCount <= 3
+        ? `${personCount} x DIN Fees`
+        : `${personCount - 3} x DIN Fees`;
     mainFees.push({
       label: dinLabel,
       amount: additionalDinFee, // This will be 0 for 2-3 persons
@@ -394,10 +397,28 @@ export const generateInvoicePDF = async (
     );
 
     pdf.setTextColor(0, 0, 0); // Set text color to black
-pdf.setFontSize(10); // Optional: set font size
+    pdf.setFontSize(10); // Optional: set font size
 
-// Adjust the X and Y as needed based on your layout
-pdf.text("All Government fee and GST charges are excluded.", 20, totalBoxStartY + dynamicBoxHeight + 10);
+    // Add Final Offered Prize below total if > 0
+    if (invoice.finalPrize && invoice.finalPrize > 0) {
+      const finalPrizeText = `Final Offered Prize: ${invoice.finalPrize.toFixed(
+        2
+      )}`;
+      const finalPrizeY = totalBoxStartY + dynamicBoxHeight + 10;
+      pdf.setFont("helvetica", "bold");
+      pdf.setTextColor(255, 0, 0); // Red color
+      pdf.text(finalPrizeText, tableRightX - 3, finalPrizeY, {
+        align: "right",
+      });
+    }
+
+    pdf.setTextColor(0, 0, 0); // Set text color to black
+
+    pdf.text(
+      "All Government fee and GST charges are excluded.",
+      20,
+      totalBoxStartY + dynamicBoxHeight + 10
+    );
 
     // --- END: Final Total Section ---
 

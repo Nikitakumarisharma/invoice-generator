@@ -19,6 +19,8 @@ import {
   BASE_FEES_BY_TYPE,
   COMPANY_TYPES,
 } from "../types/invoice";
+// import MidnightCountdown from "@/components/conter";
+import OfferBanner from "@/components/OfferBanner";
 
 interface InvoiceFormProps {
   onInvoiceChange: (
@@ -53,21 +55,21 @@ export default function InvoiceForm({ onInvoiceChange }: InvoiceFormProps) {
 
     const baseFees = BASE_FEES_BY_TYPE[companyType];
     const stateFee = selectedState.fees[companyType];
-    
+
     // Calculate additional fees based on person count
     let additionalDscFee = 0;
     let additionalDinFee = 0;
-    
+
     if (personCount > 2) {
       // DSC logic: After 2 persons, add ₹2360 for each additional person
       additionalDscFee = (personCount - 2) * 2360;
     }
-    
+
     if (personCount > 3) {
       // DIN logic: After 3 persons, add ₹1180 for each additional person
       additionalDinFee = (personCount - 3) * 1180;
     }
-    
+
     const subtotal =
       baseFees.dsc +
       additionalDscFee +
@@ -103,7 +105,7 @@ export default function InvoiceForm({ onInvoiceChange }: InvoiceFormProps) {
 
     // Track if user has made selections (not empty strings)
     const hasUserSelections = {
-      companyType: companyType !== "" as CompanyType,
+      companyType: companyType !== ("" as CompanyType),
       state: selectedStateName !== "",
     };
 
@@ -274,21 +276,7 @@ export default function InvoiceForm({ onInvoiceChange }: InvoiceFormProps) {
 
         {/* Offer section */}
         <div>
-          <div className="p-3 bg-blue-50 border border-blue-200 rounded-lg">
-            <div className="text-center">
-              <p className="text-blue-700 font-medium text-sm mb-1 font ">
-             
-              <span className="font-bold"> Grab <span className="text-red-700">₹2,000</span> OFF instantly! </span>
-              Pick Trademark, ISO, Startup India & IEC together
-
-
-
-              </p>
-              <p className="text-gray-700 text-xs">
-              ⏰ Offer valid today only — until 12 AM!
-              </p>
-            </div>
-          </div>
+          <OfferBanner />
         </div>
       </div>
     </div>

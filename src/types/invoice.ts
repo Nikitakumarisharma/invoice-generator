@@ -39,6 +39,7 @@ export interface InvoiceData {
   subtotal?: number;
   discount?: number;
   hasSpecialOffer?: boolean;
+  finalPrize?: number;
 }
 
 export interface CustomerInfo {
