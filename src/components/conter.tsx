@@ -25,9 +25,9 @@ const MidnightCountdown = () => {
         }
 
         return (
-          <span className="text-sm text-blue-900 font-semibold">
+          <span className="text-sm text-red-500 font-semibold">
             {String(hours).padStart(2, "0")}:{String(minutes).padStart(2, "0")}:
-            {String(seconds).padStart(2, "0")} left
+            {String(seconds).padStart(2, "0")}
           </span>
         );
       }}
